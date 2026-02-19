@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Journey de Fricciones</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #F8FAFC; min-height: 100vh; padding: 28px 20px; }
+  .hero { background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .hero-pct { font-size: 36px; font-weight: 900; color: #fff; }
+  .hero-sub { font-size: 13px; color: #94A3B8; }
+  .hero-detail { font-size: 11px; color: #64748B; margin-top: 2px; }
+  .hero-label { font-size: 11px; color: #94A3B8; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .badges { display: flex; gap: 10px; }
+  .badge { display: flex; flex-direction: column; align-items: center; gap: 4px; background: rgba(255,255,255,0.06); border-radius: 10px; padding: 8px 14px; }
+  .badge-num { font-size: 16px; font-weight: 800; color: #fff; }
+  .badge-lbl { font-size: 9px; color: #94A3B8; font-weight: 600; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  h1 { font-size: 20px; font-weight: 800; color: #0F172A; }
+  .subtitle { font-size: 12px; color: #64748B; margin-top: 4px; margin-bottom: 20px; }
+  .timeline { display: flex; gap: 0; align-items: flex-start; }
+  .stage-col { flex: 1; }
+  .stage-col:not(:last-child) { padding-right: 10px; }
+  .arrow { font-size: 22px; color: #CBD5E1; padding-top: 20px; flex-shrink: 0; }
+  .stage-header { border-radius: 12px; padding: 11px 14px; margin-bottom: 12px; color: #fff; text-align: center; }
+  .stage-title { font-size: 14px; font-weight: 800; }
+  .stage-sub { font-size: 10px; opacity: 0.8; margin-top: 1px; }
+  .stage-tickets { font-size: 10px; opacity: 0.7; margin-top: 2px; }
+  .card { border: 1.5px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 8px; transition: all .2s; }
+  .card-header { padding: 12px 14px; cursor: pointer; }
+  .card-title-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .card-title { font-size: 12px; font-weight: 700; color: #0F172A; }
+  .card-desc { font-size: 10px; color: #64748B; line-height: 1.4; padding-left: 16px; }
+  .card-stats { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-left: 16px; }
+  .stat-num { font-size: 16px; font-weight: 800; color: #0F172A; }
+  .stat-lbl { font-size: 9px; color: #94A3B8; }
+  .card-badge { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 8px; margin-left: 16px; }
+  .card-expand { padding: 12px 14px; border-top: 1px dashed; }
+  .expand-section { margin-bottom: 10px; }
+  .expand-title { font-size: 10px; font-weight: 700; color: #475569; margin-bottom: 4px; }
+  .expand-item { font-size: 10px; color: #334155; margin-bottom: 3px; display: flex; gap: 6px; }
+  .toggle-arrow { font-size: 12px; color: #94A3B8; margin-left: 8px; }
+  .footer { margin-top: 24px; font-size: 10px; color: #94A3B8; text-align: center; }
+  .bars { display: flex; gap: 4px; align-items: flex-end; height: 32px; }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .bar-lbl { font-size: 8px; color: #94A3B8; }
+  .trend { font-size: 9px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>Journey de Fricciones</h1>
+<p class="subtitle">Top 6 · Enero 2025 · Haz clic en cada tarjeta para ver el detalle</p>
+
+<div class="hero">
+  <div>
+    <div class="hero-label">Top 6 Fricciones · Enero 2025</div>
+    <div style="display:flex;align-items:baseline;gap:8px;">
+      <span class="hero-pct">45%</span>
+      <span class="hero-sub">del total de contactos del mes</span>
+    </div>
+    <div class="hero-detail">6,079 tickets de estas 6 fricciones · sobre un total de 13,515 en enero</div>
+  </div>
+  <div class="badges">
+    <div class="badge" style="border:1.5px solid #EF4444;">
+      <span class="dot" style="background:#EF4444;"></span>
+      <span class="badge-num">1</span>
+      <span class="badge-lbl">Sin Acción</span>
+    </div>
+    <div class="badge" style="border:1.5px solid #EAB308;">
+      <span class="dot" style="background:#EAB308;"></span>
+      <span class="badge-num">5</span>
+      <span class="badge-lbl">En Progreso</span>
+    </div>
+    <div class="badge" style="border:1.5px solid #22C55E;">
+      <span class="dot" style="background:#22C55E;"></span>
+      <span class="badge-num">0</span>
+      <span class="badge-lbl">Resuelto</span>
+    </div>
+  </div>
+</div>
+
+<div class="timeline" id="timeline"></div>
+<div class="footer">Semáforo: 🔴 Sin Acción · 🟡 En Progreso · 🟢 Resuelto · Barras = tendencia Nov→Dic→Ene</div>
+
+<script>
+const COLORS = {
+  red:    { bg:"#FEE2E2", border:"#EF4444", dot:"#EF4444", label:"Sin Acción",  text:"#991B1B", light:"#FEF2F2" },
+  yellow: { bg:"#FEF9C3", border:"#EAB308", dot:"#EAB308", label:"En Progreso", text:"#854D0E", light:"#FEFCE8" },
+  green:  { bg:"#DCFCE7", border:"#22C55E", dot:"#22C55E", label:"Resuelto",    text:"#166534", light:"#F0FDF4" },
+};
+
+const stages = [
+  { id:"clientes", label:"👤 Clientes", subtitle:"Onboarding", color:"#6366F1" },
+  { id:"giro",     label:"💸 Giro",     subtitle:"Transacción", color:"#0EA5E9" },
+  { id:"postgiro", label:"🔄 Post-Giro",subtitle:"Retención",   color:"#8B5CF6" },
+];
+
+const frictionData = {
+  clientes: [
+    { id:1, title:"KYC", desc:"Problemas con Verificación de identidad", severity:"yellow", tickets:644, pct:"4.76%", avgTime:44, area:"Onboarding, Compliance, Producto", monthly:[611,526,644], estado:"En progreso", acciones:["Usuarios no saben por qué su verificación se rechaza, generando reincidencia y abandono.","Equipo validando cómo dar visibilidad del resultado del KYC y redireccionar post-rechazo."], pendiente:["Impacto por definir."] },
+  ],
+  giro: [
+    { id:2, title:"PayIn Chile", desc:"Transferencia bancaria — método no disponible", severity:"yellow", tickets:2347, pct:"17%", avgTime:42, area:"Clientes, Ops, Tesorería", monthly:[1263,3286,2347], estado:"En progreso", acciones:["Comunicación proactiva a usuarios que transfieren antes de crear envíos.","Plantillas preventivas enviadas a usuarios en riesgo."], pendiente:["Nuevo proveedor de redundancia en Chile en implementación."] },
+    { id:3, title:"PayOut Venezuela", desc:"Banco caído — suspensión temporal de ruta", severity:"yellow", tickets:1182, pct:"9%", avgTime:32, area:"Ops, Clientes", monthly:[1676,1560,1182], estado:"En progreso", acciones:["Comunicación transparente sobre el estado del envío en contingencias.","Seguimiento manual proactivo a clientes afectados.","Mejora en coordinación entre Ops y Clientes."], pendiente:["Automatización de alertas de caídas/demoras en ruta Venezuela."] },
+    { id:4, title:"Seguimiento de Remesas", desc:"Dudas sobre entrega — retrasos y validaciones", severity:"yellow", tickets:664, pct:"4.91%", avgTime:44, area:"Clientes, Ops, Producto", monthly:[956,1405,664], estado:"En progreso", acciones:["Diagnóstico: falta de comunicación proactiva sobre retrasos.","Implementando barra de avance y notificaciones proactivas de estado."], pendiente:["Se estima reducción del 35% en casos de soporte con la mejora."] },
+  ],
+  postgiro: [
+    { id:5, title:"Referidos & Cupones", desc:"Recompensas no visibles pese a meta cumplida", severity:"yellow", tickets:683, pct:"5%", avgTime:28, area:"Growth, Producto, Clientes", monthly:[197,502,683], estado:"En progreso", acciones:["Escalado a Producto para que el usuario vea el estado de su recompensa directamente en la app."], pendiente:["Desarrollo pendiente de implementación."] },
+    { id:6, title:"Cuenta Bloqueada", desc:"Bloqueo por compliance — sin plan de acción", severity:"red", tickets:559, pct:"4.14%", avgTime:29, area:"Clientes, Compliance", monthly:[237,495,559], estado:"Sin Acción", acciones:["Casos recibidos por chat y escalados al canal de Compliance manualmente."], pendiente:["Usuarios no ven el correo de Compliance o no reciben seguimiento tras enviar documentación."] },
+  ],
+};
+
+function miniBar(monthly) {
+  const max = Math.max(...monthly);
+  const labels = ["Nov","Dic","Ene"];
+  return monthly.map((v,i) => `
+    <div class="bar-wrap">
+      <div style="width:18px;height:${Math.max(4,Math.round((v/max)*28))}px;background:${i===2?'#0EA5E9':'#CBD5E1'};border-radius:3px;"></div>
+      <span class="bar-lbl">${labels[i]}</span>
+    </div>`).join('');
+}
+
+function trendInfo(monthly) {
+  const [n,d,e] = monthly;
+  if (e > d) return { arrow:"⬆", color:"#EF4444", label:"Subiendo" };
+  if (e < d) return { arrow:"⬇", color:"#22C55E", label:"Bajando" };
+  return { arrow:"→", color:"#EAB308", label:"Estable" };
+}
+
+function buildCard(f) {
+  const c = COLORS[f.severity];
+  const t = trendInfo(f.monthly);
+  const cardId = `card-${f.id}`;
+  const expandId = `expand-${f.id}`;
+  return `
+    <div class="card" id="${cardId}" style="border-color:#E2E8F0;">
+      <div class="card-header" onclick="toggleCard(${f.id})" style="background:#fff;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="flex:1;">
+            <div class="card-title-row">
+              <span class="dot" style="background:${c.dot};flex-shrink:0;"></span>
+              <span class="card-title">${f.title}</span>
+            </div>
+            <div class="card-desc">${f.desc}</div>
+          </div>
+          <span class="toggle-arrow" id="arrow-${f.id}">▼</span>
+        </div>
+        <div class="card-stats">
+          <div>
+            <div class="stat-num">${f.tickets.toLocaleString('es')}</div>
+            <div class="stat-lbl">tickets · ${f.pct} del total</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="stat-num">${f.avgTime}m</div>
+            <div class="stat-lbl">tiempo resolución</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+            <div class="bars">${miniBar(f.monthly)}</div>
+            <span class="trend" style="color:${t.color};">${t.arrow} ${t.label}</span>
+          </div>
+        </div>
+        <span class="card-badge" style="background:${c.bg};color:${c.text};border:1px solid ${c.border};">${c.label} — ${f.estado}</span>
+      </div>
+      <div class="card-expand" id="${expandId}" style="display:none;background:${c.light};border-top-color:${c.border};">
+        <div class="expand-section">
+          <div class="expand-title">🏢 Área responsable</div>
+          <div style="font-size:10px;color:#334155;">${f.area}</div>
+        </div>
+        <div class="expand-section">
+          <div class="expand-title">✅ Acciones implementadas</div>
+          ${f.acciones.map(a=>`<div class="expand-item"><span style="color:#22C55E;flex-shrink:0;">•</span>${a}</div>`).join('')}
+        </div>
+        <div class="expand-section">
+          <div class="expand-title">⏳ Pendiente</div>
+          ${f.pendiente.map(p=>`<div class="expand-item"><span style="color:#EAB308;flex-shrink:0;">•</span>${p}</div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function toggleCard(id) {
+  const expand = document.getElementById(`expand-${id}`);
+  const card = document.getElementById(`card-${id}`);
+  const arrow = document.getElementById(`arrow-${id}`);
+  const isOpen = expand.style.display !== 'none';
+  expand.style.display = isOpen ? 'none' : 'block';
+  arrow.textContent = isOpen ? '▼' : '▲';
+}
+
+// Build timeline
+const tl = document.getElementById('timeline');
+stages.forEach((stage, si) => {
+  const frictions = frictionData[stage.id];
+  const total = frictions.reduce((s,f)=>s+f.tickets,0);
+  const col = document.createElement('div');
+  col.style.flex = '1';
+  col.style.display = 'flex';
+  col.style.alignItems = 'flex-start';
+
+  const inner = document.createElement('div');
+  inner.style.flex = '1';
+  if (si < stages.length-1) inner.style.paddingRight = '10px';
+
+  inner.innerHTML = `
+    <div class="stage-header" style="background:${stage.color};">
+      <div class="stage-title">${stage.label}</div>
+      <div class="stage-sub">${stage.subtitle}</div>
+      <div class="stage-tickets">${total.toLocaleString('es')} tickets</div>
+    </div>
+    ${frictions.map(buildCard).join('')}`;
+
+  col.appendChild(inner);
+
+  if (si < stages.length-1) {
+    const arrow = document.createElement('div');
+    arrow.className = 'arrow';
+    arrow.textContent = '›';
+    col.appendChild(arrow);
+  }
+
+  tl.appendChild(col);
+});
+</script>
+</body>
+</html>
